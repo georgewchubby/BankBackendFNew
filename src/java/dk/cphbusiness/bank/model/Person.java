@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package dk.cphbusiness.bank.model;
 
 import java.io.Serializable;
@@ -28,49 +22,63 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "PERSONS")
 @NamedQueries({
-    @NamedQuery(name = "Person.findAll", query = "SELECT p FROM Person p")})
+    @NamedQuery(name = "Person.findAll", query = "SELECT p FROM Person p")
+
+})
 public class Person implements Serializable {
+
     private static final long serialVersionUID = 1L;
+    
     @Id
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 11)
     @Column(name = "CPR")
     private String cpr;
+    
     @Size(max = 80)
     @Column(name = "TITLE")
     private String title;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 80)
     @Column(name = "FIRSTNAME")
     private String firstname;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 80)
     @Column(name = "LASTNAME")
     private String lastname;
+    
     @Size(max = 80)
     @Column(name = "STREET")
     private String street;
-    // @Pattern(regexp="^\\(?(\\d{3})\\)?[- ]?(\\d{3})[- ]?(\\d{4})$", message="Invalid phone/fax format, should be as xxx-xxx-xxxx")//if the field contains phone or fax number consider using this annotation to enforce field validation
+    
+// @Pattern(regexp="^\\(?(\\d{3})\\)?[- ]?(\\d{3})[- ]?(\\d{4})$", message="Invalid phone/fax format, should be as xxx-xxx-xxxx")//if the field contains phone or fax number consider using this annotation to enforce field validation
     @Size(max = 8)
     @Column(name = "PHONE")
     private String phone;
-    // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
+    
+// @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
     @Size(max = 80)
     @Column(name = "EMAIL")
     private String email;
+
     @Size(max = 255)
     @Column(name = "PASSWORD")
     private String password;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 30)
     @Column(name = "DTYPE")
     private String dtype;
+    
     @OneToMany(mappedBy = "person")
     private Collection<Account> accountCollection;
+    
     @JoinColumn(name = "POSTALCODE", referencedColumnName = "POSTALCODE")
     @ManyToOne
     private Postal postal;
@@ -201,5 +209,5 @@ public class Person implements Serializable {
     public String toString() {
         return "dk.cphbusiness.bank.model.Person[ cpr=" + cpr + " ]";
     }
-    
+
 }

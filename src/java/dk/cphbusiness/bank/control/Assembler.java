@@ -1,6 +1,7 @@
 package dk.cphbusiness.bank.control;
 
 import dk.cphbusiness.bank.contract.dto.AccountSummary;
+import dk.cphbusiness.bank.contract.dto.CustomerDetail;
 import dk.cphbusiness.bank.contract.dto.CustomerSummary;
 import dk.cphbusiness.bank.model.Account;
 import dk.cphbusiness.bank.model.Person;
@@ -44,5 +45,19 @@ public class Assembler {
                 "Checking Account",
                 account.getBalance());
 
+    }
+    
+    public static CustomerDetail createCustomerDetail(Person customer) {
+    return new CustomerDetail(
+        customer.getCpr(),
+        customer.getTitle(),
+        customer.getFirstname(),
+        customer.getLastname(),
+        customer.getStreet(),
+        ""+customer.getPostal().getPostalcode(),
+        customer.getPostal().getPostaldistrict(),
+        customer.getPhone(),
+        customer.getEmail()
+        );
     }
 }
